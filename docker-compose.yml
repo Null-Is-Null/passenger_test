@@ -1,0 +1,24 @@
+version: '3.0'
+
+services:
+  app_bad:
+    build: .
+    ports:
+     - "3000:80"
+    environment:
+      PASSENGER_APP_ENV: 'production'
+      TEST_VAR: 'SHOULD BE VISIBLE'
+      TEST_VAR_BAD: 'SHOULD NOT BE VISIBLE'
+      SECRET_KEY_BASE: '12345'
+
+  app_good:
+    build:
+      context: .
+      dockerfile: Dockerfile-0923
+    ports:
+     - "3001:80"
+    environment:
+      PASSENGER_APP_ENV: 'production'
+      TEST_VAR: 'SHOULD BE VISIBLE'
+      TEST_VAR_BAD: 'SHOULD NOT BE VISIBLE'
+      SECRET_KEY_BASE: '12345'
